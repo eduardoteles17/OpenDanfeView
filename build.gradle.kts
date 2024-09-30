@@ -23,5 +23,4 @@ kotlin {
 
 application {
     mainClass = "dev.eduardoteles.opendanfeview.OpenDanfeViewKt"
-    mainModule = "dev.eduardoteles.opendanfeview"
 }

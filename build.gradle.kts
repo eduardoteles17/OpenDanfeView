@@ -8,9 +8,15 @@ version = "0.0.0"
 
 repositories {
     mavenCentral()
+    maven {
+        url = uri("https://jaspersoft.jfrog.io/artifactory/jaspersoft-repo/")
+    }
 }
 
 dependencies {
+    implementation("br.com.swconsultoria:java-danfe:1.6")
+    implementation("com.formdev:flatlaf:3.5.1")
+    implementation("com.github.pcorless.icepdf:icepdf-viewer:7.2.1")
     testImplementation(kotlin("test"))
 }
 

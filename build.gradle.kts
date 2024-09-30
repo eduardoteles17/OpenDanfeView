@@ -1,6 +1,14 @@
 plugins {
+    idea
     application
     kotlin("jvm") version "2.0.20"
+}
+
+idea {
+    module {
+        isDownloadJavadoc = true
+        isDownloadSources = true
+    }
 }
 
 group = "dev.eduardoteles"
@@ -23,6 +31,7 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
 kotlin {
     jvmToolchain(21)
 }

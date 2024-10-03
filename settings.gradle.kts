@@ -1,6 +1,7 @@
 rootProject.name = "OpenDanfeView"
 
 include(":app")
+include(":pdfviewer")
 
 
 pluginManagement {

@@ -25,7 +25,6 @@ repositories {
 dependencies {
     implementation("br.com.swconsultoria:java-danfe:1.6")
     implementation("com.formdev:flatlaf:3.5.1")
-    implementation("com.github.pcorless.icepdf:icepdf-viewer:7.2.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines:0.19.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.9.0")
     implementation("me.friwi:jcefmaven:122.1.10")

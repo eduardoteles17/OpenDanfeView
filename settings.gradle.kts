@@ -1,5 +1,13 @@
-plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
-}
 rootProject.name = "OpenDanfeView"
 
+include(":app")
+
+
+pluginManagement {
+    plugins {
+        val kotlinVersion: String by settings
+        kotlin("jvm") version kotlinVersion
+        kotlin("plugin.serialization") version kotlinVersion
+        kotlin("multiplatform") version kotlinVersion
+    }
+}

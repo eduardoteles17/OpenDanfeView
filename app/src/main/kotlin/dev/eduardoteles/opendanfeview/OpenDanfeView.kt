@@ -9,7 +9,7 @@ import dev.eduardoteles.opendanfeview.ui.Browser
 import dev.eduardoteles.opendanfeview.ui.MenuBar
 import dev.eduardoteles.opendanfeview.ui.SplashScreen
 import dev.eduardoteles.opendanfeview.ui.TabbedPane
-import dev.eduardoteles.opendanfeview.utils.AppFilesUtil
+import dev.eduardoteles.opendanfeview.utils.AppFolderUtils
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import me.friwi.jcefmaven.CefAppBuilder
@@ -93,13 +93,13 @@ class OpenDanfeView(
 fun main() {
     val splashScreen = SplashScreen()
 
-    val cefDir = AppFilesUtil.getCefDirectory()
+    val cefDir = AppFolderUtils.getCefDirectory()
 
     val builder = CefAppBuilder()
 
     builder.setInstallDir(File(cefDir))
     builder.cefSettings.windowless_rendering_enabled = false
-    builder.cefSettings.cache_path = AppFilesUtil.getCefCacheDirectory()
+    builder.cefSettings.cache_path = AppFolderUtils.getCefCacheDirectory()
 
     builder.setAppHandler(object : me.friwi.jcefmaven.MavenCefAppHandlerAdapter() {
         override fun stateHasChanged(state: CefApp.CefAppState) {

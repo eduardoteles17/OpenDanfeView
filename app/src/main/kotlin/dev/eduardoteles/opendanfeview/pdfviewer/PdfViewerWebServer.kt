@@ -1,6 +1,6 @@
 package dev.eduardoteles.opendanfeview.pdfviewer
 
-import dev.eduardoteles.opendanfeview.utils.AppFilesUtil
+import dev.eduardoteles.opendanfeview.utils.AppFolderUtils
 import io.ktor.server.engine.*
 import io.ktor.server.http.content.*
 import io.ktor.server.netty.*
@@ -18,7 +18,7 @@ class PdfViewerWebServer private constructor() {
     private val server = embeddedServer(Netty, port = port) {
         routing {
             staticResources("/", "pdfviewer")
-            staticFiles("/pdf-files", File(AppFilesUtil.getDanfeTemporaryDirectory()))
+            staticFiles("/pdf-files", File(AppFolderUtils.getDanfeTemporaryDirectory()))
         }
     }
 

@@ -4,7 +4,7 @@ import com.formdev.flatlaf.util.SystemInfo
 import java.io.File
 
 
-class AppFilesUtil {
+class AppFolderUtils {
     companion object {
         fun getApplicationDirectory(): String {
             val baseAppDataDir = when {

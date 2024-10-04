@@ -21,6 +21,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("stdlib-js"))
                 implementation("io.kvision:kvision:$kvisionVersion")
+                implementation(npm("pdfjs-dist", "4.6.82"))
             }
         }
     }

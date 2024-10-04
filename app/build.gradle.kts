@@ -19,11 +19,17 @@ repositories {
 }
 
 dependencies {
+    val ktorVersion = "2.3.12"
+    val kotlinCoroutines = "1.9.0"
+
     implementation("br.com.swconsultoria:java-danfe:1.6")
     implementation("com.formdev:flatlaf:3.5.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines:0.19.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.9.0")
+    implementation("ch.qos.logback:logback-classic:1.5.8")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutines")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:$kotlinCoroutines")
     implementation("me.friwi:jcefmaven:122.1.10")
+    implementation("io.ktor:ktor-server-netty:$ktorVersion")
+    implementation("io.ktor:ktor-server-core:$ktorVersion")
     testImplementation(kotlin("test"))
 }
 

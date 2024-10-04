@@ -4,4 +4,5 @@ package dev.eduardoteles.opendanfeview.pdfviewer.libs.pdfjs
 @JsNonModule
 external object PDFJs {
     val GlobalWorkerOptions: GlobalWorkerOptions
+    fun getDocument(src: String): PDFDocumentLoadingTask
 }

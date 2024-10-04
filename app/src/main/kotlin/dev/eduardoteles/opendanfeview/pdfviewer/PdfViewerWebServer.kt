@@ -7,15 +7,30 @@ import io.ktor.server.netty.*
 import io.ktor.server.routing.*
 import org.slf4j.LoggerFactory
 import java.io.File
+import java.net.ServerSocket
 import kotlin.random.Random
 
 class PdfViewerWebServer private constructor() {
-    var port = Random.nextInt(10000, 65535)
+    var port = getValidRandomPort()
         private set
 
     private val logger = LoggerFactory.getLogger(PdfViewerWebServer::class.java)
 
-    private val server = embeddedServer(Netty, port = port) {
+    private fun getValidRandomPort(): Int {
+        val newPort = Random.nextInt(10000, 65535)
+
+        try {
+            ServerSocket(newPort).use { serverlessSocket ->
+                serverlessSocket.reuseAddress = true
+            }
+
+            return newPort
+        } catch (e: Exception) {
+            return getValidRandomPort()
+        }
+    }
+
+    private val server = embeddedServer(Netty, host = "127.0.0.1", port = port) {
         routing {
             staticResources("/", "pdfviewer")
             staticFiles("/pdf-files", File(AppFolderUtils.getDanfeTemporaryDirectory()))

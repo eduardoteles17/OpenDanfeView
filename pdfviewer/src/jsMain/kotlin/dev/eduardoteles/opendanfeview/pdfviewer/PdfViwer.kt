@@ -1,22 +1,32 @@
 package dev.eduardoteles.opendanfeview.pdfviewer
 
+import dev.eduardoteles.opendanfeview.pdfviewer.components.PdfViewer
 import dev.eduardoteles.opendanfeview.pdfviewer.libs.pdfjs.PDFJs
 import io.kvision.Application
-import io.kvision.html.button
-import io.kvision.html.div
+import io.kvision.CoreModule
+import io.kvision.html.h1
 import io.kvision.module
 import io.kvision.panel.root
+import io.kvision.require
 import io.kvision.startApplication
+import kotlinx.browser.window
+import org.w3c.dom.url.URLSearchParams
 
-class PdfViewer : Application() {
+
+class App : Application() {
+    init {
+        require("css/tailwind.css")
+    }
+
     override fun start() {
+        val pdfUrl = URLSearchParams(window.location.search).get("pdfUrl")
         root("kvapp") {
-            div("Hello World!")
-            button(text = "Click me!") {
-                onClick {
-                    js("alert('Clicked!')") as Unit
-                }
+            if (pdfUrl != null) {
+                add(PdfViewer(pdfUrl))
+            } else {
+                h1("PDF Viewer")
             }
+
         }
     }
 }
@@ -24,5 +34,5 @@ class PdfViewer : Application() {
 fun main() {
     PDFJs.GlobalWorkerOptions.workerSrc = "pdfviewer-pdf.worker.js"
 
-    startApplication(::PdfViewer, module.hot)
+    startApplication(::App, module.hot, CoreModule)
 }

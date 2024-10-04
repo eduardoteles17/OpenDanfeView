@@ -1,1 +1,3 @@
-config.devServer.open = false;
+if (config.devServer) {
+    config.devServer.open = false;
+}

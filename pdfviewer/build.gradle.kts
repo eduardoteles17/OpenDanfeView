@@ -10,6 +10,7 @@ repositories {
 }
 
 val kvisionVersion: String by System.getProperties()
+val coroutinesVersion: String by System.getProperties()
 
 kotlin {
     js(IR) {
@@ -21,6 +22,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("stdlib-js"))
                 implementation("io.kvision:kvision:$kvisionVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
                 implementation(npm("pdfjs-dist", "4.6.82"))
             }
         }

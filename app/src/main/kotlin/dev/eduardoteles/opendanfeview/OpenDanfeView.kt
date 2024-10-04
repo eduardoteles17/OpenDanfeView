@@ -4,11 +4,14 @@ import br.com.swconsultoria.impressao.service.ImpressaoService
 import br.com.swconsultoria.impressao.util.ImpressaoUtil
 import com.formdev.flatlaf.FlatIntelliJLaf
 import com.formdev.flatlaf.util.SystemInfo
+import dev.eduardoteles.opendanfeview.pdfviewer.PdfViewerWebServer
 import dev.eduardoteles.opendanfeview.ui.Browser
 import dev.eduardoteles.opendanfeview.ui.MenuBar
 import dev.eduardoteles.opendanfeview.ui.SplashScreen
 import dev.eduardoteles.opendanfeview.ui.TabbedPane
 import dev.eduardoteles.opendanfeview.utils.AppFilesUtil
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import me.friwi.jcefmaven.CefAppBuilder
 import org.cef.CefApp
 import org.cef.CefClient
@@ -107,20 +110,28 @@ fun main() {
 
     val app = builder.build()
 
-    SwingUtilities.invokeLater {
-        if (SystemInfo.isLinux || SystemInfo.isWindows) {
-            JFrame.setDefaultLookAndFeelDecorated(true)
-            JDialog.setDefaultLookAndFeelDecorated(true)
+    val server = PdfViewerWebServer.instance
+
+    runBlocking {
+        val serverJob = launch {
+            server.start()
         }
-//        FontPropertiesManager.getInstance().loadOrReadSystemFonts();
-        FlatIntelliJLaf.setup()
+        Runtime.getRuntime().addShutdownHook(Thread {
+            server.stop()
+            runBlocking {
+                serverJob.join()
+            }
+        })
 
-        splashScreen.close()
-        OpenDanfeView.start(app)
-    }
+        SwingUtilities.invokeLater {
+            if (SystemInfo.isLinux || SystemInfo.isWindows) {
+                JFrame.setDefaultLookAndFeelDecorated(true)
+                JDialog.setDefaultLookAndFeelDecorated(true)
+            }
+            FlatIntelliJLaf.setup()
 
-    SwingUtilities.invokeLater {
-
-
+            splashScreen.close()
+            OpenDanfeView.start(app)
+        }
     }
 }

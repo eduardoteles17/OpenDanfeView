@@ -1,6 +1,7 @@
 package dev.eduardoteles.opendanfeview.utils
 
 import com.formdev.flatlaf.util.SystemInfo
+import java.io.File
 
 
 class AppFilesUtil {
@@ -15,9 +16,10 @@ class AppFilesUtil {
 
 
             val appDir = "$baseAppDataDir/OpenDanfeView"
+            val appDirFile = File(appDir)
 
-            if (!java.io.File(appDir).exists()) {
-                java.io.File(appDir).mkdirs()
+            if (!appDirFile.exists()) {
+                appDirFile.mkdirs()
             }
 
             return appDir
@@ -31,6 +33,18 @@ class AppFilesUtil {
         fun getCefCacheDirectory(): String {
             val appDir = getApplicationDirectory()
             return "$appDir/cef_cache"
+        }
+
+        fun getDanfeTemporaryDirectory(): String {
+            val appDir = getApplicationDirectory()
+            val tmpFolder = "$appDir/danfe_temp"
+            val tmpFolderFile = File(tmpFolder)
+
+            if (!tmpFolderFile.exists()) {
+                tmpFolderFile.mkdirs()
+            }
+
+            return tmpFolder
         }
     }
 }
